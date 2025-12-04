@@ -3,7 +3,7 @@ name: CI/CD Deploy
 on:
   push:
     branches:
-      - main      # runs only when you push to main
+      - main
 
 jobs:
   deploy:
@@ -16,15 +16,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'     # or 18 / 22 based on your project
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      # Optional: if your project needs a build step before deploy
-      # - name: Build project
-      #   run: npm run build
+      - name: Build project
+        run: npm run build    # ⬅️ this creates the `dist` folder
 
-      - name: Run deploy
-        run: npm run deploy
+      - name: Deploy to GitHub Pages
+        run: npm run deploy   # ⬅️ this now finds `dist` and publishes it
+        env:
+          NODE_ENV: production
