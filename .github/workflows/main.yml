@@ -20,8 +20,5 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: GitHub pages install
-        run: npm install gh-pages
-
-      - name: build and deploy gh pages
-        run: npm run deploy
+      - name: build creating
+        run: npm run build
